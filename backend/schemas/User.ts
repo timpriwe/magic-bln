@@ -20,6 +20,10 @@ export const User = list ({
         avatar: cloudinaryImage({
             cloudinary,
             label: 'Source'
+        }),
+        events: relationship({
+            ref: 'Event.participants',
+            many: true,
         })
     }
 })

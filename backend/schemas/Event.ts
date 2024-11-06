@@ -15,16 +15,16 @@ export const Event = list({
     format: select({
       isRequired: true,
       options: [
-        { label: 'Standard', value: 'STANDARD' },
-        { label: 'Pauper', value: 'PAUPER' },
-        { label: 'Modern', value: 'MODERN' },
-        { label: 'Pioneer', value: 'PIONEER' },
-        { label: 'Legacy', value: 'LEGACY' },
-        { label: 'Vintage', value: 'VINTAGE' },
-        { label: 'Commander', value: 'COMMANDER' },
-        { label: 'Highlander', value: 'HIGHLANDER' },
-        { label: 'Sealed', value: 'SEALED' },
-        { label: 'Draft', value: 'DRAFT' },
+        { label: 'Standard', value: 'Standard' },
+        { label: 'Pauper', value: 'Pauper' },
+        { label: 'Modern', value: 'Modern' },
+        { label: 'Pioneer', value: 'Pioneer' },
+        { label: 'Legacy', value: 'Legacy' },
+        { label: 'Vintage', value: 'Vintage' },
+        { label: 'Commander', value: 'Commander' },
+        { label: 'Highlander', value: 'Highlander' },
+        { label: 'Sealed', value: 'Sealed' },
+        { label: 'Draft', value: 'Draft' },
       ],
     }),
     store: relationship({ ref: 'Store.events' }),
@@ -47,6 +47,10 @@ export const Event = list({
         },
       },
     }),
+    participants: relationship({
+        ref: 'User.events',
+        many: true,
+    })
   },
   hooks: {
     resolveInput: async ({ resolvedData, context }) => {
