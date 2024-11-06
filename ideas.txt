@@ -1,6 +1,9 @@
 - Erstellen von Events (inkl. Serientermine)
 - User können sich bei Events anmelden und abmelden
   (offene Anmeldung oder mit Bestätigung)
+- Authentifizierung
+- Dark Mode
+- Styling allgemein -> Muss geil in Mobile sein
 - User können einstellen ob sie in den Events namentlich erwähnt werden
   oder Anonym
 - User können einstellen ob andere User sehen können für welche Events
@@ -10,6 +13,7 @@
 - Store Owner / Organisatoren können einen Companion Code eintragen der
   direkt oder nach Anmeldung am Event angezeigt wird
 - Anmeldung via QR Code
+
 - Umwandlung in Progressive Web App
     - Push Benachrichtigungen -> voll konfigurierbar
 

@@ -1,4 +1,3 @@
-// EventDetails.js
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Drawer from '@mui/material/Drawer';
