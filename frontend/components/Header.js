@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -26,6 +27,9 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  const router = useRouter();
+  const currentPath = router.pathname;
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -46,23 +50,23 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <StyleIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Link href='/' passHref>
-          <Typography
-            variant="h6"
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Magic Berlin
-          </Typography>
-        </Link>
+          <Link href="/" passHref>
+            <Typography
+              variant="h6"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Magic Berlin
+            </Typography>
+          </Link>
           {/* Mobile menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -94,7 +98,9 @@ function Header() {
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                   <Link href={page.path} passHref>
-                    <Typography sx={{ textAlign: 'center' }}>{page.name}</Typography>
+                    <Typography sx={{ textAlign: 'center' }}>
+                      {page.name}
+                    </Typography>
                   </Link>
                 </MenuItem>
               ))}
@@ -126,7 +132,12 @@ function Header() {
               <Link href={page.path} passHref key={page.name}>
                 <Button
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{
+                    my: 2,
+                    color: currentPath === page.path ? 'red' : 'white',
+                    display: 'block',
+                    fontWeight: currentPath === page.path ? 'bold' : 'normal',
+                  }}
                 >
                   {page.name}
                 </Button>

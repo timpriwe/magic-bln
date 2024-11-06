@@ -1,6 +1,11 @@
 - Erstellen von Events (inkl. Serientermine)
 - User können sich bei Events anmelden und abmelden
   (offene Anmeldung oder mit Bestätigung)
+- User können einstellen ob sie in den Events namentlich erwähnt werden
+  oder Anonym
+- User können einstellen ob andere User sehen können für welche Events
+  sie noch angemeldet sind
+- Freunde Funktion mit eigenen Privacy Settings (?)
 - Store Owner / Organisatoren mit eigenen Rollen und Rechten
 - Store Owner / Organisatoren können einen Companion Code eintragen der
   direkt oder nach Anmeldung am Event angezeigt wird
