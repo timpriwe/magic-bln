@@ -84,6 +84,7 @@ export default function Events() {
             {
               outline: 'none',
             },
+          cursor: 'pointer',
         }}
         rows={rows}
         columns={columns}
@@ -92,7 +93,6 @@ export default function Events() {
             paginationModel: { pageSize: 25 },
           },
         }}
-        disableRowSelectionOnClick
         pageSizeOptions={[5, 10, 25]}
         onRowClick={handleRowClick}
       />
