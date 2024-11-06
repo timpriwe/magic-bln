@@ -2,6 +2,7 @@
 - User können sich bei Events anmelden und abmelden
   (offene Anmeldung oder mit Bestätigung)
 - Authentifizierung
+- Store Page mit Cards umsetzen
 - Dark Mode
 - Styling allgemein -> Muss geil in Mobile sein
 - User können einstellen ob sie in den Events namentlich erwähnt werden
