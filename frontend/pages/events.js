@@ -28,9 +28,7 @@ export default function EventsPage() {
       <Events />
 
       <Drawer
-        sx={{
-          zIndex: 1400,
-        }}
+        sx={{}}
         anchor="right"
         open={isDrawerOpen}
         onClose={handleDrawerClose}

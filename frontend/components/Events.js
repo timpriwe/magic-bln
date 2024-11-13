@@ -7,7 +7,7 @@ import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import { useState } from 'react';
 import EventDetails from './EventDetails'; // Import der neuen EventDetails-Komponente
 
-const ALL_EVENTS_QUERY = gql`
+export const ALL_EVENTS_QUERY = gql`
   query ALL_EVENTS_QUERY {
     allEvents {
       id

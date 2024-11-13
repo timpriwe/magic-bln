@@ -7,10 +7,10 @@ import {
   Select,
   InputLabel,
   FormControl,
-  Drawer,
 } from '@mui/material';
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import { ALL_EVENTS_QUERY } from './Events';
 
 // Mutation für das Erstellen eines Events
 const CREATE_EVENT_MUTATION = gql`
@@ -48,7 +48,7 @@ const ALL_STORES_QUERY = gql`
   }
 `;
 
-export default function CreateEvent({ onClose, open }) {
+export default function CreateEvent({ onClose }) {
   const { data, loading, error } = useQuery(ALL_STORES_QUERY);
   const [createEvent] = useMutation(CREATE_EVENT_MUTATION);
 
@@ -66,11 +66,12 @@ export default function CreateEvent({ onClose, open }) {
         variables: {
           name,
           description,
-          price: parseInt(price),
+          price: parseInt(price) * 100,
           time,
           format,
           storeId,
         },
+        refetchQueries: [{ query: ALL_EVENTS_QUERY }],
       });
       onClose(); // Schließe den Drawer nach dem Absenden des Formulars
     } catch (error) {
@@ -88,6 +89,7 @@ export default function CreateEvent({ onClose, open }) {
         <Box sx={{ marginBottom: 2 }}>
           <TextField
             fullWidth
+            name="name"
             label="Event Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -99,6 +101,7 @@ export default function CreateEvent({ onClose, open }) {
         <Box sx={{ marginBottom: 2 }}>
           <TextField
             fullWidth
+            name="description"
             label="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -112,6 +115,7 @@ export default function CreateEvent({ onClose, open }) {
         <Box sx={{ marginBottom: 2 }}>
           <TextField
             fullWidth
+            name="price"
             label="Price"
             type="number"
             value={price}
@@ -124,6 +128,7 @@ export default function CreateEvent({ onClose, open }) {
         <Box sx={{ marginBottom: 2 }}>
           <TextField
             fullWidth
+            name="time"
             label="Time"
             type="datetime-local"
             value={time}
@@ -136,10 +141,11 @@ export default function CreateEvent({ onClose, open }) {
         </Box>
 
         {/* Format des Events */}
-        {/* <Box sx={{ marginBottom: 2 }}>
+        <Box sx={{ marginBottom: 2 }}>
           <FormControl fullWidth>
             <InputLabel>Format</InputLabel>
             <Select
+              name="format"
               value={format}
               onChange={(e) => setFormat(e.target.value)}
               label="Format"
@@ -157,13 +163,14 @@ export default function CreateEvent({ onClose, open }) {
               <MenuItem value="Draft">Draft</MenuItem>
             </Select>
           </FormControl>
-        </Box> */}
+        </Box>
 
         {/* Store-Auswahl */}
-        {/* <Box sx={{ marginBottom: 2 }}>
+        <Box sx={{ marginBottom: 2 }}>
           <FormControl fullWidth>
             <InputLabel>Store</InputLabel>
             <Select
+              name="store"
               value={storeId}
               onChange={(e) => setStoreId(e.target.value)}
               label="Store"
@@ -176,7 +183,7 @@ export default function CreateEvent({ onClose, open }) {
               ))}
             </Select>
           </FormControl>
-        </Box> */}
+        </Box>
 
         {/* Submit-Button */}
         <Button type="submit" variant="contained" color="primary">
