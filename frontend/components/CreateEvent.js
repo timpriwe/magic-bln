@@ -8,6 +8,7 @@ import {
   InputLabel,
   FormControl,
 } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import { ALL_EVENTS_QUERY } from './Events';
@@ -79,8 +80,8 @@ export default function CreateEvent({ onClose }) {
     }
   };
 
-  if (loading) return <p>Loading stores...</p>;
-  if (error) return <p>Error loading stores: {error.message}</p>;
+  if (loading) return <CircularProgress />;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <Box sx={{ width: 400, padding: 2 }}>
