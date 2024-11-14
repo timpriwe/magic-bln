@@ -1,17 +1,20 @@
 // Events.js
 import { useQuery } from '@apollo/client';
-
+import { Fab, Drawer } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import { useState } from 'react';
-import EventDetails from './EventDetails'; // Import der neuen EventDetails-Komponente
+import EventDetails from './EventDetails';
+import CreateEvent from './CreateEvent';
 import { ALL_EVENTS_QUERY } from '../lib/queries';
 
 export default function Events() {
   const { data, error, loading } = useQuery(ALL_EVENTS_QUERY);
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isCreateEventMode, setIsCreateEventMode] = useState(false);
 
   if (loading) return <CircularProgress />;
   if (error) return <p>Error: {error.message}</p>;
@@ -45,6 +48,12 @@ export default function Events() {
 
   const handleRowClick = (params) => {
     setSelectedEventId(params.id);
+    setIsCreateEventMode(false);
+    setDrawerOpen(true);
+  };
+
+  const handleCreateEventClick = () => {
+    setIsCreateEventMode(true);
     setDrawerOpen(true);
   };
 
@@ -84,12 +93,26 @@ export default function Events() {
         onRowClick={handleRowClick}
       />
 
-      {/* Einbindung der EventDetails-Komponente */}
-      <EventDetails
-        eventId={selectedEventId}
-        open={drawerOpen}
-        onClose={handleCloseDrawer}
-      />
+      <Drawer anchor="right" open={drawerOpen} onClose={handleCloseDrawer}>
+        {isCreateEventMode ? (
+          <CreateEvent onClose={handleCloseDrawer} />
+        ) : (
+          <EventDetails eventId={selectedEventId} />
+        )}
+      </Drawer>
+
+      <Fab
+        onClick={handleCreateEventClick}
+        sx={{
+          position: 'fixed',
+          bottom: (theme) => theme.spacing(10),
+          right: (theme) => theme.spacing(4),
+        }}
+        color="primary"
+        aria-label="add"
+      >
+        <AddIcon />
+      </Fab>
     </Box>
   );
 }
