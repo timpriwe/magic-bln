@@ -1,29 +1,9 @@
 import { useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-
-const EVENT_DETAILS_QUERY = gql`
-  query EVENT_DETAILS_QUERY($where: EventWhereUniqueInput!) {
-    Event(where: $where) {
-      id
-      name
-      time
-      format
-      description
-      store {
-        name
-        adress
-      }
-      price
-      participants {
-        name
-      }
-    }
-  }
-`;
+import { EVENT_DETAILS_QUERY } from '../lib/queries';
 
 export default function EventDetails({ eventId, open, onClose }) {
   const { data, loading, error } = useQuery(EVENT_DETAILS_QUERY, {

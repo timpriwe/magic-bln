@@ -1,26 +1,12 @@
 // Events.js
 import { useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
+
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import { useState } from 'react';
 import EventDetails from './EventDetails'; // Import der neuen EventDetails-Komponente
-
-export const ALL_EVENTS_QUERY = gql`
-  query ALL_EVENTS_QUERY {
-    allEvents {
-      id
-      name
-      time
-      format
-      store {
-        name
-      }
-      price
-    }
-  }
-`;
+import { ALL_EVENTS_QUERY } from '../lib/queries';
 
 export default function Events() {
   const { data, error, loading } = useQuery(ALL_EVENTS_QUERY);

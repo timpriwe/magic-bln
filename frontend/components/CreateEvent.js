@@ -10,44 +10,12 @@ import {
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useMutation, useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
-import { ALL_EVENTS_QUERY } from './Events';
 
-// Mutation für das Erstellen eines Events
-const CREATE_EVENT_MUTATION = gql`
-  mutation CREATE_EVENT_MUTATION(
-    $name: String!
-    $description: String!
-    $price: Int!
-    $time: String!
-    $format: String!
-    $storeId: ID!
-  ) {
-    createEvent(
-      data: {
-        name: $name
-        description: $description
-        price: $price
-        time: $time
-        format: $format
-        store: { connect: { id: $storeId } }
-      }
-    ) {
-      id
-      name
-    }
-  }
-`;
-
-// Query für das Abrufen der Stores
-const ALL_STORES_QUERY = gql`
-  query ALL_STORES_QUERY {
-    allStores {
-      id
-      name
-    }
-  }
-`;
+import {
+  ALL_EVENTS_QUERY,
+  ALL_STORES_QUERY,
+  CREATE_EVENT_MUTATION,
+} from '../lib/queries';
 
 export default function CreateEvent({ onClose }) {
   const { data, loading, error } = useQuery(ALL_STORES_QUERY);
